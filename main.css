@@ -1,0 +1,10 @@
+body {
+	color: rgba(30, 170, 123, 0.39);
+}
+
+div {
+	border: 1px solid green;
+	text-align: center;
+	letter-spacing: 1em;
+	line-height: 2em;
+}
