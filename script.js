@@ -109,3 +109,167 @@ d3.select("#svg2")
 		fill: "rgba(0,0,0,0)"
 
 	});
+
+//	第五堂課 D3-04-Data 2016 年8月且台北市且發票數量大於10億張的項目
+var svg3 = d3.select("#svg3");
+d3.json("invoice-taipei.json", function (dataSet) {
+	var svg3 = d3.select("#svg3");
+	var fDataSet = dataSet.filter(function (d) {
+
+		return d.amount > 1000000000 && d.date === "2016/8/1" && d.cid === "A";
+	});
+	for (var i = 0; i < fDataSet.length; i++) {
+		svg3.append("rect")
+			.attr({
+				"x": 250,
+				"y": 30 + 30 * i,
+				"width": 50 + fDataSet[i].amount / 100000000,
+				"height": 25,
+				"fill": "red"
+			});
+
+
+		svg3.append("text")
+			.attr({
+				"x": 10,
+				"y": 55 + 30 * i,
+				"font-size": 15,
+				"font-family": "arial"
+			}).text(fDataSet[i].industry);
+	};
+});
+
+//D3-06-D3-Binding.pdf p.22 把數字小於70改成紅色
+var arr = [85, 60, 99, 49, 77, 82];
+
+bind();
+render();
+
+
+function bind() {
+	var selection = d3.select("#redNumber")
+
+	.selectAll("div")
+
+	.data(arr);
+
+	selection.enter()
+		.append("div");
+
+	selection.exit().remove();
+
+}
+
+
+function render() {
+	d3.selectAll("#redNumber div").style({
+		"font-size": "40px",
+		color: function (d) {
+			if (d < 70) {
+				return "red";
+			} else {
+				return "black";
+			}
+		}
+	}).text(function (d, i) {
+		return (i + 1) + ":" + d;
+	});
+}
+
+//D3 - 06 - D3 - Binding.pdf p .25 建立簡單動態圖表
+
+var arr2 = [85, 60, 99, 49, 77, 82, 60, 77, 88];
+var w = 800,
+	h = 400,
+	p = 100;
+
+
+
+svg2();
+bind2();
+render2();
+
+
+
+function svg2() {
+	d3.select("svg4").append("svg").attr({
+		id: "svg4",
+		width: w,
+		height: h
+	});
+}
+
+function bind2() {
+	//rect-----------------------
+	var selection2 = d3.select("#svg4")
+		.selectAll("rect")
+		.data(arr2);
+	selection2.enter()
+		.append("rect");
+
+	selection2.exit().remove();
+
+	//text-----------------------
+
+	var selection_text = d3.select("#svg4")
+		.selectAll("text")
+		.data(arr2);
+
+	selection_text.enter()
+		.append("text");
+
+	selection_text.exit().remove();
+
+}
+
+function render2() {
+
+	d3.select("#svg4").selectAll("rect")
+		.attr({
+			x: function (d, i) {
+				return p + (40 + 2) * i
+			},
+			y: function (d, i) {
+				return h - p - d;
+			},
+			width: 40,
+			height: function (d, i) {
+				return d;
+			},
+			fill: function (d, i) {
+				if (d < 70) {
+					return "red";
+				} else {
+					return "lightgreen";
+				}
+
+			}
+		});
+	d3.select("#svg4").selectAll("text")
+		.attr({
+			x: function (d, i) {
+				return p + (40 + 2) * i + 10
+			},
+			y: function (d, i) {
+				return h - p + 20;
+			}
+
+		}).text(function (d) {
+			return d;
+		})
+
+}
+
+
+function update() {
+	var num = random(10, 100);
+	arr2.push(num);
+	bind2();
+	render2();
+}
+
+function update_remove() {
+	arr2.shift();
+	bind2();
+	render2();
+}

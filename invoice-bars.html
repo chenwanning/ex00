@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>d3-start</title>
+	<script src="https://d3js.org/d3.v3.js"></script>
+	<style>
+		div {
+			font-size: 7px;
+		}
+	</style>
+</head>
+
+<body>
+	<svg width="900" height="500">
+      
+  </svg>
+
+	<script>
+		d3.json("invoice-taipei.json", function(dataSet) {
+			var svg = d3.select("svg");
+			var fDataSet = dataSet.filter(function(d) {
+					return d.amount > 1000000000 && d.date === "2016/8/1" && d.cid === "A";
+				})
+				//var xScale =
+			for (var i = 0; i < fDataSet.length; i++) {
+				//				svg.append("text").attr({ // "x": , // "y": , // "font-size": , // // });
+				svg.append("rect")
+			}
+		});
+	</script>
+</body>
+
+</html>
