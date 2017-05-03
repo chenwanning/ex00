@@ -113,6 +113,10 @@ d3.select("#svg2")
 //	第五堂課 D3-04-Data 2016 年8月且台北市且發票數量大於10億張的項目
 var svg3 = d3.select("#svg3");
 d3.json("invoice-taipei.json", function (dataSet) {
+
+	var xScale = d3.scale.linear()
+		.domain([0, 1000000000])
+		.range([0, 10]);
 	var svg3 = d3.select("#svg3");
 	var fDataSet = dataSet.filter(function (d) {
 
@@ -123,7 +127,7 @@ d3.json("invoice-taipei.json", function (dataSet) {
 			.attr({
 				"x": 250,
 				"y": 30 + 30 * i,
-				"width": 50 + fDataSet[i].amount / 100000000,
+				"width": xScale(fDataSet[i].amount),
 				"height": 25,
 				"fill": "red"
 			});
