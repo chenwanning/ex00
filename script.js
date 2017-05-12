@@ -121,7 +121,15 @@ d3.json("invoice-taipei.json", function (dataSet) {
 	var fDataSet = dataSet.filter(function (d) {
 
 		return d.amount > 1000000000 && d.date === "2016/8/1" && d.cid === "A";
+
+
+
 	});
+
+
+
+
+
 	for (var i = 0; i < fDataSet.length; i++) {
 		svg3.append("rect")
 			.attr({

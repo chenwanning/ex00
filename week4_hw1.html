@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<body>
+	<h2>D3-06-scale p.15</h2>
+	<h4>試著用ordinal(),秀出各政黨顏色</h4>
+	<script>
+		var index = ["中國國民黨", "民主進步黨", "時代力量", "無黨團結聯盟", "親民黨"]
+		var color = ["blue", "green", "yellow", "gray", "orange"]
+		var xScale = d3.scale.ordinal()
+			.domain(index)
+			.range(color);
+
+		for (var i = 0; i < index.length; i++) {
+			d3.select('body')
+				.append('div')
+				.style({
+					'height': "100px",
+					'width': "150px",
+					'background': xScale(i),
+				}).append("text")
+				.style({
+					"font-size": "20px",
+					"color": "black"
+				}).text(index[i]);
+		}
+
+	</script>
+</body>
+
+</html>

@@ -35,6 +35,9 @@ input[type=button] {
 }
 
 #inpute {
-	position: absolute;
-	left: 200px;
+	padding-left: 150px;
+}
+
+a {
+	font-size: 20px;
 }
